@@ -14,6 +14,8 @@ class Pokemon
   end
 
   def self.find(id, db)
-    @@all.detect{|p| p.id == id}
+    name = db.execute("SELECT pokemon.name FROM pokemon WHERE pokemon.id = ?" id)
+    type = db.execute("SELECT pokemon.type FROM pokemon WHERE pokemon.id = ?" id)
+    self.new(id, name, type, db)
   end
 end
